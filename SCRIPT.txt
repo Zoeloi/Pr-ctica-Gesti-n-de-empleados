@@ -1,0 +1,37 @@
+CREATE DATABASE bdempleados;
+
+-- 2. Crear la tabla cumpliendo la práctica y con nivel profesional
+CREATE TABLE empleado (
+    id_empleado    INTEGER GENERATED ALWAYS AS IDENTITY,
+    codigo         VARCHAR(10)  NOT NULL,  
+    nombre         VARCHAR(100) NOT NULL,  
+    correo         VARCHAR(100) NOT NULL,  
+    cargo          VARCHAR(60)  NOT NULL, 
+    salario        NUMERIC(10, 2) NOT NULL, 
+    fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    activo         BOOLEAN NOT NULL DEFAULT TRUE,
+
+    -- Constraints 
+    CONSTRAINT pk_empleado PRIMARY KEY (id_empleado),
+    CONSTRAINT uq_empleado_codigo UNIQUE (codigo),
+    CONSTRAINT uq_empleado_correo UNIQUE (correo),
+    CONSTRAINT ck_empleado_salario_positivo CHECK (salario > 0),
+    
+    -- Validaciones extra 
+    CONSTRAINT ck_empleado_nombre_no_vacio CHECK (BTRIM(nombre) <> ''),
+    CONSTRAINT ck_empleado_correo_no_vacio CHECK (BTRIM(correo) <> ''),
+    CONSTRAINT ck_empleado_cargo_no_vacio CHECK (BTRIM(cargo) <> '')
+);
+-- Inserción de 10 empleados de prueba
+-- Nota: No se incluyen id_empleado, fecha_registro ni activo porque PostgreSQL los genera automáticamente
+INSERT INTO empleado (codigo, nombre, correo, cargo, salario) VALUES
+('EMP-001', 'Ana Garcia', 'ana.garcia@empresa.com', 'Desarrolladora Java', 1500.00),
+('EMP-002', 'Carlos Lopez', 'carlos.lopez@empresa.com', 'Analista de Sistemas', 1400.50),
+('EMP-003', 'Maria Rodriguez', 'maria.rodriguez@empresa.com', 'Diseñadora UI/UX', 1300.00),
+('EMP-004', 'Juan Perez', 'juan.perez@empresa.com', 'Gerente de Proyectos', 2500.00),
+('EMP-005', 'Laura Gomez', 'laura.gomez@empresa.com', 'Administradora de Base de Datos', 1800.75),
+('EMP-006', 'Pedro Martinez', 'pedro.martinez@empresa.com', 'Especialista en Redes', 1600.00),
+('EMP-007', 'Sofia Ramirez', 'sofia.ramirez@empresa.com', 'Soporte Técnico', 900.00),
+('EMP-008', 'Diego Torres', 'diego.torres@empresa.com', 'Ingeniero DevOps', 2100.00),
+('EMP-009', 'Elena Silva', 'elena.silva@empresa.com', 'Analista QA', 1250.00),
+('EMP-010', 'Javier Vargas', 'javier.vargas@empresa.com', 'Arquitecto de Software', 3000.00);
