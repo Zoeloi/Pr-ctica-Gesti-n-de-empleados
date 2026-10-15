@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.demo.controller.EmpleadoController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+
+    <!-- SECCIÓN: Búsqueda Parametrizada -->
+    <TitledPane text="Búsqueda Parametrizada" collapsible="false">
+        <VBox spacing="10">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ComboBox fx:id="cbFiltro1" promptText="Columna 1" prefWidth="120"/>
+                <TextField fx:id="txtFiltro1" promptText="Valor 1" prefWidth="150"/>
+
+                <ComboBox fx:id="cbFiltro2" promptText="Columna 2" prefWidth="120"/>
+                <TextField fx:id="txtFiltro2" promptText="Valor 2" prefWidth="150"/>
+
+                <ComboBox fx:id="cbFiltro3" promptText="Columna 3" prefWidth="120"/>
+                <TextField fx:id="txtFiltro3" promptText="Valor 3" prefWidth="150"/>
+            </HBox>
+            <HBox spacing="10">
+                <Button text="Buscar" onAction="#buscarEmpleados" prefWidth="100" style="-fx-base: #3498db; -fx-text-fill: white;"/>
+                <Button text="Quitar filtros" onAction="#quitarFiltros" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <!-- SECCIÓN: Formulario CRUD -->
+    <TitledPane text="Gestión de Empleados" collapsible="false">
+        <GridPane hgap="15" vgap="10">
+            <Label text="Código:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="txtCodigo" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Correo:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+            <TextField fx:id="txtCorreo" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+            <Label text="Cargo:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            <TextField fx:id="txtCargo" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+            <Label text="Salario:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="txtSalario" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <HBox spacing="15" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="3" alignment="CENTER">
+                <padding><Insets top="10"/></padding>
+                <Button text="Guardar" onAction="#guardarEmpleado" prefWidth="90" style="-fx-base: #2ecc71; -fx-text-fill: white;"/>
+                <Button text="Actualizar" onAction="#actualizarEmpleado" prefWidth="90" style="-fx-base: #f1c40f;"/>
+                <Button text="Eliminar" onAction="#eliminarEmpleado" prefWidth="90" style="-fx-base: #e74c3c; -fx-text-fill: white;"/>
+                <Button text="Limpiar" onAction="#limpiarFormulario" prefWidth="90"/>
+            </HBox>
+        </GridPane>
+    </TitledPane>
+
+    <!-- SECCIÓN: TableView -->
+    <TableView fx:id="tblEmpleados" VBox.vgrow="ALWAYS" onMouseClicked="#seleccionarEmpleado">
+        <columns>
+            <TableColumn fx:id="colCodigo" text="Código" prefWidth="100"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="200"/>
+            <TableColumn fx:id="colCorreo" text="Correo" prefWidth="200"/>
+            <TableColumn fx:id="colCargo" text="Cargo" prefWidth="150"/>
+            <TableColumn fx:id="colSalario" text="Salario" prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>
